@@ -42,14 +42,13 @@ namespace SV
                 try
                 {
                     byte[] senddata = Form1.MyDataPacker("SCREENLIVECLOSE", System.Text.Encoding.UTF8.GetBytes("ECHO"));
-                    sock.Send(senddata, 0, senddata.Length, SocketFlags.None);
-
-                    if (infoAl != null)
-                    {                       
-                        infoAl.CloseSocks();
-                    }
+                    sock.Send(senddata, 0, senddata.Length, SocketFlags.None);                   
                 }
                 catch (Exception) { }
+                if (infoAl != null)
+                {
+                    infoAl.CloseSocks();
+                }
                 button2.Enabled = false;
                 button1.Enabled = true;
             }
