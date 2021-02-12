@@ -213,8 +213,11 @@ namespace SV
                     try
                     {
                         zoom += 1;
-                        byte[] senddata = Form1.MyDataPacker("ZOOM", Encoding.UTF8.GetBytes(zoom.ToString()));
-                        soketimiz.BeginSend(senddata, 0, senddata.Length, SocketFlags.None, null, null);
+                        if (metroButton3.Text == "Stop")
+                        {
+                            byte[] senddata = Form1.MyDataPacker("ZOOM", Encoding.UTF8.GetBytes(zoom.ToString()));
+                            soketimiz.BeginSend(senddata, 0, senddata.Length, SocketFlags.None, null, null);
+                        }
                         metroLabel1.Text = "Zoom: x" + zoom.ToString();
                     }
                     catch (Exception) { }
@@ -231,8 +234,11 @@ namespace SV
                     try
                     {
                         zoom -= 1;
-                        byte[] senddata = Form1.MyDataPacker("ZOOM", Encoding.UTF8.GetBytes(zoom.ToString()));
-                        soketimiz.BeginSend(senddata, 0, senddata.Length, SocketFlags.None, null, null);
+                        if (metroButton3.Text == "Stop")
+                        {
+                            byte[] senddata = Form1.MyDataPacker("ZOOM", Encoding.UTF8.GetBytes(zoom.ToString()));
+                            soketimiz.BeginSend(senddata, 0, senddata.Length, SocketFlags.None, null, null);
+                        }
                         metroLabel1.Text = "Zoom: x" + zoom.ToString();
                     }
                     catch (Exception) { }
