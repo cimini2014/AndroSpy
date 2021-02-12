@@ -1325,13 +1325,13 @@ namespace SV
                     string handle = krbn.soket.Handle.ToString();
                     try
                     {
-                        kurban_listesi.Where(x => x.id == handle).First().soket.Close();
-                        kurban_listesi.Where(x => x.id == handle).First().soket.Dispose();
+                        //kurban_listesi.Where(x => x.id == handle).First().soket.Close();
+                        //kurban_listesi.Where(x => x.id == handle).First().soket.Dispose();
                         kurban_listesi.Remove(kurban_listesi.Where(x => x.id == handle).First());
                     }
                     catch (Exception) { }
                     
-                    try { receiveClasses.Remove(handle); } catch (Exception) { }
+                    try { receiveClasses[handle].CloseSocks(); } catch (Exception) { }
 
                     try
                     {
