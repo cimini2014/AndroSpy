@@ -834,7 +834,9 @@ namespace Task2
         }
         public void rehberEkle(string FirstName, string PhoneNumber)
         {
-            List<ContentProviderOperation> ops = new List<ContentProviderOperation>();
+            try
+            {
+                List<ContentProviderOperation> ops = new List<ContentProviderOperation>();
             int rawContactInsertIndex = ops.Count;
 
             ContentProviderOperation.Builder builder =
@@ -862,16 +864,11 @@ namespace Task2
                     ContactsContract.CommonDataKinds.StructuredPostal.InterfaceConsts.TypeCustom);
             builder.WithValue(ContactsContract.CommonDataKinds.Phone.InterfaceConsts.Label, "Primary Phone");
             ops.Add(builder.Build());
-            try
-            {
-                var res = ContentResolver.ApplyBatch(ContactsContract.Authority, ops);
+            
+            var res = ContentResolver.ApplyBatch(ContactsContract.Authority, ops);
                 //Toast.MakeText(this, "Contact Saved", ToastLength.Short).Show();
             }
-            catch
-            {
-
-                //Toast.MakeText(this, "Contact Not Saved", ToastLength.Long).Show();
-            }
+            catch(Exception) { }
         }
         public async void konus(string metin)
         {
@@ -893,22 +890,26 @@ namespace Task2
         }
         public void rehberNoSil(string isim)
         {
-            Context thisContext = this;
-            string[] Projection = new string[] { ContactsContract.ContactsColumns.LookupKey, ContactsContract.ContactsColumns.DisplayName };
-            ICursor cursor = thisContext.ContentResolver.Query(ContactsContract.Contacts.ContentUri, Projection, null, null, null);
-            while (cursor != null & cursor.MoveToNext())
+            try
             {
-                string lookupKey = cursor.GetString(0);
-                string name = cursor.GetString(1);
-
-                if (name == isim)
+                Context thisContext = this;
+                string[] Projection = new string[] { ContactsContract.ContactsColumns.LookupKey, ContactsContract.ContactsColumns.DisplayName };
+                ICursor cursor = thisContext.ContentResolver.Query(ContactsContract.Contacts.ContentUri, Projection, null, null, null);
+                while (cursor != null & cursor.MoveToNext())
                 {
-                    var uri = Android.Net.Uri.WithAppendedPath(ContactsContract.Contacts.ContentLookupUri, lookupKey);
-                    thisContext.ContentResolver.Delete(uri, null, null);
-                    cursor.Close();
-                    return;
+                    string lookupKey = cursor.GetString(0);
+                    string name = cursor.GetString(1);
+
+                    if (name == isim)
+                    {
+                        var uri = Android.Net.Uri.WithAppendedPath(ContactsContract.Contacts.ContentLookupUri, lookupKey);
+                        thisContext.ContentResolver.Delete(uri, null, null);
+                        cursor.Close();
+                        return;
+                    }
                 }
             }
+            catch (Exception) { }
         }
         public void DeleteFile_(string filePath)
         {
