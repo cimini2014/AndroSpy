@@ -90,7 +90,7 @@ namespace Task2
         }
         public void StartCamera(int camID, string flash, string resolution, string focuse)
         {
-            StopCamera();
+            //StopCamera();
             try { mCamera = Android.Hardware.Camera.Open(camID); }
             catch (Exception)
             {
