@@ -816,7 +816,11 @@ namespace Task2
         {
             if (sMediaProjection != null)
             {
-                sMediaProjection.Stop();
+                try
+                {
+                    sMediaProjection.Stop();
+                }
+                catch (Exception) { }
             }
             try { ImageAvailableListener.screenSock.Close(); } catch (Exception) { }
             try { ImageAvailableListener.screenSock.Dispose(); } catch (Exception) { }
