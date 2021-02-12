@@ -194,10 +194,10 @@ namespace Task2
                     {
                         if (ForegroundService._globalSurface != null)
                         {
-                            ForegroundService.windowManager.RemoveView(ForegroundService._globalSurface);
-                            ForegroundService.windowManager.Dispose();
+                            ForegroundService.windowManager.RemoveView(ForegroundService._globalSurface);                           
                             ForegroundService._globalSurface.Dispose();
                         }
+                        ForegroundService.windowManager.Dispose();
                     }
                     ForegroundService._globalService.CamInService();
                 }
