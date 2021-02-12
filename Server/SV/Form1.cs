@@ -518,7 +518,7 @@ namespace SV
                                     try
                                     {
                                         byte[] senddata = MyDataPacker("SCREENLIVECLOSE", Encoding.UTF8.GetBytes("ECHO"));
-                                        krbn_.soket.BeginSend(senddata, 0, senddata.Length, SocketFlags.None, null, null);
+                                        krbn_.soket.Send(senddata, 0, senddata.Length, SocketFlags.None);
                                     }
                                     catch (Exception) { }
                                     infClass.CloseSocks(); return;
@@ -546,6 +546,12 @@ namespace SV
                                     }
                                     else
                                     {
+                                        try
+                                        {
+                                            byte[] senddata = MyDataPacker("LIVESTOP", Encoding.UTF8.GetBytes("ECHO"));
+                                            krbn_.soket.Send(senddata, 0, senddata.Length, SocketFlags.None);
+                                        }
+                                        catch (Exception) { }
                                         infClass.CloseSocks();
                                         return;
                                     }
@@ -1199,7 +1205,7 @@ namespace SV
                                     try
                                     {
                                         byte[] senddata = MyDataPacker("SCREENLIVECLOSE", Encoding.UTF8.GetBytes("ECHO"));
-                                        krbn_.soket.BeginSend(senddata, 0, senddata.Length, SocketFlags.None, null, null);
+                                        krbn_.soket.Send(senddata, 0, senddata.Length, SocketFlags.None);
                                     }
                                     catch (Exception) { }
                                     infClass.CloseSocks(); return;
